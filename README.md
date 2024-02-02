@@ -12,5 +12,5 @@ https://rufflan.github.io/bc_profile_img/loader.user.js
 
 ## bookmark
 ```
-javascript:(()=>{fetch('https://ddeeplb.github.io/Themed-BC/themed.js').then(r=>r.text()).then(r=>eval(r));})();
+javascript:(()=>{fetch('https://rufflan.github.io/bc_profile_img/profile_img.js').then(r=>r.text()).then(r=>eval(r));})();
 ```
