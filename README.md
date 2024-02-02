@@ -8,4 +8,11 @@ profiles pic: https://cdn.discordapp.com/attachments/1193390721210794125/1193461
 
 
 Tampermonkey
+```
 https://rufflan.github.io/bc_profile_img/loader.user.js
+```
+
+bookmark
+```
+javascript:(()=>{fetch('https://ddeeplb.github.io/Themed-BC/themed.js').then(r=>r.text()).then(r=>eval(r));})();
+```
