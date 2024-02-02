@@ -36,17 +36,13 @@ var callback = (mutationList, observer) => {
   }
 };
 
-
 var observer = new MutationObserver(callback);
 
-
 var config = {
-    attributes: false, // 속성 변화 할때 감지
-    childList: true, // 자식노드 추가/제거 감지
-    characterData: true // 데이터 변경전 내용 기록
+    attributes: false,
+    childList: true,
+    characterData: true
 };
-
-
 observer.observe(target, config);
 
 
