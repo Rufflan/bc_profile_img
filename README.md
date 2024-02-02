@@ -8,9 +8,7 @@ profiles pic: https://cdn.discordapp.com/attachments/1193390721210794125/1193461
 
 
 Tampermonkey
-```
-[https://rufflan.github.io/bc_profile_img/loader.user.js](https://rufflan.github.io/bc_profile_img/loader.user.js)
-```
+https://rufflan.github.io/bc_profile_img/loader.user.js
 
 bookmark
 ```
