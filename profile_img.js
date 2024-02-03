@@ -1,3 +1,5 @@
+var target = document.body;
+
 function OnlineProfileRun() {
 	// Sets the screen controls
 	console.log("test");
