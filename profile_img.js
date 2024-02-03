@@ -29,7 +29,7 @@ var callback = (mutationList, observer) => {
   	if(mutationList[0].addedNodes[0].localName == "textarea"){
 		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
 		let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
-		let img_calc_data = calc_position((1790 * 0.8 + 100), 160, 1790 * 0.2, 1790 * 0.2);
+		let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
 		console.log(calc_data);
 		console.log(img_calc_data);
 		
