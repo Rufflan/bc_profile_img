@@ -11,9 +11,8 @@ go to your online description and added line
 it is optimized for square images.
 
 
-## 주의사항
+## caution(주의사항)
 
-caution
 
 바이오를 켠채로 창 크기가 변경되면 위치가 맞지 않습니다
 
