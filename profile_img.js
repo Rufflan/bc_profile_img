@@ -22,7 +22,7 @@ var callback = (mutationList, observer) => {
 				  tmp_img_section.setAttribute("src",profile_pic);
 				  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;left: "+(eval(width) + (eval(width) * 0.2) - 10)+"px;top: "+(eval(top))+"px;width: "+(eval(width) * 0.2)+"px;height: "+(eval(width) * 0.2)+"px;object-fit: cover;");
 				  document.body.append(tmp_img_section);
-			  },100);
+			  },200);
 		  }
 	}else if(mutationList[0].addedNodes[0].localName != "img"){
 		if(document.getElementById("profile_img")){
