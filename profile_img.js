@@ -11,6 +11,7 @@ var callback = (mutationList, observer) => {
 				  let width = mutationList[0].addedNodes[0].style.width.replace("px","");
 				  let height = mutationList[0].addedNodes[0].style.height.replace("px","");
 				  let top = mutationList[0].addedNodes[0].style.top.replace("px","");
+				  let left = mutationList[0].addedNodes[0].style.left.replace("px","");
 				  let profile_pic = tmp_profile_pic[1].split("\n")[0];
 				  let tmp = document.createElement("style");
 				  tmp.setAttribute("id","profile_img");
@@ -20,7 +21,7 @@ var callback = (mutationList, observer) => {
 				  let tmp_img_section = document.createElement("img");
 				  tmp_img_section.setAttribute("id","img_profile");
 				  tmp_img_section.setAttribute("src",profile_pic);
-				  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;left: "+(eval(width) + (eval(width) * 0.2) - 10)+"px;top: "+(eval(top))+"px;width: "+(eval(width) * 0.2)+"px;height: "+(eval(width) * 0.2)+"px;object-fit: cover;");
+				  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;left: "+((eval(width) * 0.8) + (eval(left) * 1.1) - 10)+"px;top: "+(eval(top))+"px;width: "+(eval(width) * 0.2)+"px;height: "+(eval(width) * 0.2)+"px;object-fit: cover;");
 				  document.body.append(tmp_img_section);
 			  },200);
 		  }
