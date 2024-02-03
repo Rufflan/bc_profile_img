@@ -11,7 +11,7 @@ go to your online description and added line
 it is optimized for square images.
 
 
-주의사항
+## 주의사항
 
 caution
 
