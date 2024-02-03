@@ -4,12 +4,12 @@ function calc_position(X, Y, W, H) {
 	
 
 	// Different positions based on the width/height ratio
-	let HRatio = document.getElementById("MainCanvas")[0].clientHeight / 1000;
-	let WRatio = document.getElementById("MainCanvas")[0].clientWidth / 2000;
+	let HRatio = document.getElementById("MainCanvas").clientHeight / 1000;
+	let WRatio = document.getElementById("MainCanvas").clientWidth / 2000;
 	Font *= Math.max(HRatio, WRatio);
-	let Top = document.getElementById("MainCanvas")[0].offsetTop + Y * HRatio;
+	let Top = document.getElementById("MainCanvas").offsetTop + Y * HRatio;
 	let Height = H * HRatio;
-	let Left = document.getElementById("MainCanvas")[0].offsetLeft + X * WRatio;
+	let Left = document.getElementById("MainCanvas").offsetLeft + X * WRatio;
 	let Width = W * WRatio;
 
 	// Sets the element style
