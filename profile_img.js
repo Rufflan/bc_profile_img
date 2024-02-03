@@ -1,5 +1,37 @@
 var target = document.body;
 
+//ElementPositionFix("DescriptionInput", 36, 100, 160, 1790, 750);
+function calcPosition(ElementID, Font, X, Y, W, H) {
+	var E = document.getElementById(ElementID);
+	// Verify the element exists
+	if (!E) {
+		console.warn("A call to ElementPositionFix was made on non-existent element with ID '" + ElementID + "'");
+		return;
+	}
+
+	// Different positions based on the width/height ratio
+	const HRatio = MainCanvas.canvas.clientHeight / 1000;
+	const WRatio = MainCanvas.canvas.clientWidth / 2000;
+	Font *= Math.max(HRatio, WRatio);
+	const Top = MainCanvas.canvas.offsetTop + Y * HRatio;
+	const Height = H * HRatio;
+	const Left = MainCanvas.canvas.offsetLeft + X * WRatio;
+	const Width = W * WRatio;
+
+	// Sets the element style
+	Object.assign(E.style, {
+		fontSize: Font + "px",
+		fontFamily: CommonGetFontName(),
+		position: "fixed",
+		left: Left + "px",
+		top: Top + "px",
+		width: Width + "px",
+		height: Height + "px",
+		display: "inline"
+	});
+
+}
+
 var callback = (mutationList, observer) => {
   if(mutationList[0].addedNodes.length > 0){
   	if(mutationList[0].addedNodes[0].localName == "textarea"){
