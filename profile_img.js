@@ -39,7 +39,7 @@ var callback = (mutationList, observer) => {
 			  let profile_pic = tmp_profile_pic[1].split("\n")[0];
 			  let tmp = document.createElement("style");
 			  tmp.setAttribute("id","profile_img");
-			  tmp.innerHTML = 'textarea#DescriptionInput{width:'+calc_data.width+'px !important;}';
+			  tmp.innerHTML = 'textarea#DescriptionInput{width:'+calc_data.width+' !important;}';
 			  document.head.append(tmp);
 
 			  let tmp_img_section = document.createElement("img");
