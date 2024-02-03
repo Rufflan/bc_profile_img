@@ -1,9 +1,3 @@
-var target = document.body;
-
-/**
- * Runs and draws the online profile screen
- * @returns {void} - Nothing
- */
 function OnlineProfileRun() {
 	// Sets the screen controls
 	console.log();
@@ -20,6 +14,7 @@ function OnlineProfileRun() {
 				  ElementPositionFix("DescriptionInput", 36, 100, 160, 1790, 750);
 			  }
 		}
+	  }
 	};
 
 	var observer = new MutationObserver(callback);
