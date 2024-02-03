@@ -6,16 +6,18 @@ var callback = (mutationList, observer) => {
 		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
 		  
 		  if(tmp_profile_pic.length > 1){
+			  let width = mutationList[0].addedNodes[0].style.width.replace("px","");
+			  let height = mutationList[0].addedNodes[0].style.height.replace("px","");
 			  let profile_pic = tmp_profile_pic[1].split("\n")[0];
 			  let tmp = document.createElement("style");
 			  tmp.setAttribute("id","profile_img");
-			  tmp.innerHTML = 'textarea#DescriptionInput{width:75% !important;}';
+			  tmp.innerHTML = 'textarea#DescriptionInput{width:'+(eval(width) * 0.75)+'px !important;}';
 			  document.head.append(tmp);
 
 			  let tmp_img_section = document.createElement("img");
 			  tmp_img_section.setAttribute("id","img_profile");
 			  tmp_img_section.setAttribute("src",profile_pic);
-			  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;right: 3.5%;top: 16%;width: 15%;height: 30%;object-fit: cover;");
+			  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;left: "+(eval(width) * 0.75 + 20)+"px;top: "+(eval(height) + 20)+"px;width: "+(eval(width) * 0.2)+"px;height: 30%;object-fit: cover;");
 			  document.body.append(tmp_img_section);
 		  }
 	}else if(mutationList[0].addedNodes[0].localName != "img"){
