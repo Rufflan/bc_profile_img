@@ -10,6 +10,16 @@ go to your online description and added line
 
 it is optimized for square images.
 
+
+주의사항
+
+caution
+
+바이오를 켠채로 창 크기가 변경되면 위치가 맞지 않습니다
+
+while open description and resize the window, it can be break
+
+
 ## example(예시)
 ```
 profiles pic: https://cdn.discordapp.com/attachments/1193390721210794125/1193461638213419088/FViXbyx.png?ex=65c87c43&is=65b60743&hm=562755364cc610ad7dfdc61ff581d4bba97815dfaa74e6d735d22bda00ed0a96&
