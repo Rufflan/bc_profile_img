@@ -1,6 +1,6 @@
 function OnlineProfileRun() {
 	// Sets the screen controls
-	console.log();
+	console.log("test");
 	DrawText(TextGet((InformationSheetSelection.IsPlayer()) ? "EnterDescription" : "ViewDescription").replace("CharacterName", InformationSheetSelection.Name), 910, 105, "Black", "Gray");
 
 
