@@ -2,6 +2,8 @@ try makes bondageclub game profile img addon
 
 go to your online description and added line
 
+it is optimized for square images.
+
 ## example<br/>
 profiles pic: https://cdn.discordapp.com/attachments/1193390721210794125/1193461638213419088/FViXbyx.png?ex=65c87c43&is=65b60743&hm=562755364cc610ad7dfdc61ff581d4bba97815dfaa74e6d735d22bda00ed0a96&
 
