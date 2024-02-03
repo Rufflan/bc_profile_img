@@ -16,3 +16,4 @@ https://rufflan.github.io/bc_profile_img/loader.user.js
 ```
 javascript:(()=>{fetch('https://rufflan.github.io/bc_profile_img/profile_img.js').then(r=>r.text()).then(r=>eval(r));})();
 ```
+![image](https://github.com/Rufflan/bc_profile_img/assets/87934447/7402df5a-fe37-4c5b-abaa-2134578c9ef5)
