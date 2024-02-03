@@ -13,7 +13,6 @@ function calc_position(X, Y, W, H) {
 
 	// Sets the element style
 	let data = {
-		fontSize: Font + "px",
 		fontFamily: CommonGetFontName(),
 		position: "fixed",
 		left: Left + "px",
