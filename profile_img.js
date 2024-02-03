@@ -8,9 +8,7 @@ var callback = (mutationList, observer) => {
 		  if(tmp_profile_pic.length > 1){
 			  setTimeout(function(){
 				  
-				  console.log(mutationList[0].addedNodes[0].offsetHeight);
 				  let width = mutationList[0].addedNodes[0].style.width.replace("px","");
-				  console.log(width);
 				  let height = mutationList[0].addedNodes[0].style.height.replace("px","");
 				  let top = mutationList[0].addedNodes[0].style.top.replace("px","");
 				  let profile_pic = tmp_profile_pic[1].split("\n")[0];
