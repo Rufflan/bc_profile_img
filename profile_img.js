@@ -28,8 +28,10 @@ var callback = (mutationList, observer) => {
   if(mutationList[0].addedNodes.length > 0){
   	if(mutationList[0].addedNodes[0].localName == "textarea"){
 		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
-		let calc_data = calc_position(100, 160, 1790, 750);
+		let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
+		let img_calc_data = calc_position((1790 * 0.8 + 100), 160, 1790 * 0.2, 1790 * 0.2);
 		console.log(calc_data);
+		console.log(img_calc_data);
 		
 		  if(tmp_profile_pic.length > 1){
 			  let width = mutationList[0].addedNodes[0].style.width.replace("px","");
@@ -37,13 +39,13 @@ var callback = (mutationList, observer) => {
 			  let profile_pic = tmp_profile_pic[1].split("\n")[0];
 			  let tmp = document.createElement("style");
 			  tmp.setAttribute("id","profile_img");
-			  tmp.innerHTML = 'textarea#DescriptionInput{width:'+(eval(width) * 0.75)+'px !important;}';
+			  tmp.innerHTML = 'textarea#DescriptionInput{width:'+calc_data.width+'px !important;}';
 			  document.head.append(tmp);
 
 			  let tmp_img_section = document.createElement("img");
 			  tmp_img_section.setAttribute("id","img_profile");
 			  tmp_img_section.setAttribute("src",profile_pic);
-			  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;left: "+(eval(width) * 0.75 + 20)+"px;top: "+(eval(height) + 20)+"px;width: "+(eval(width) * 0.2)+"px;height: 30%;object-fit: cover;");
+			  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;left: "+img_calc_data.left+";top: "+img_calc_data.top+";width: "+img_calc_data.width+";height: "+img_calc_data.height+";object-fit: cover;");
 			  document.body.append(tmp_img_section);
 		  }
 	}else if(mutationList[0].addedNodes[0].localName != "img"){
