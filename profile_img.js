@@ -28,12 +28,10 @@ var callback = (mutationList, observer) => {
   if(mutationList[0].addedNodes.length > 0){
   	if(mutationList[0].addedNodes[0].localName == "textarea"){
 		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
-		let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
-		let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
-		console.log(calc_data);
-		console.log(img_calc_data);
-		
+
 		  if(tmp_profile_pic.length > 1){
+			  let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
+			  let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
 			  let width = mutationList[0].addedNodes[0].style.width.replace("px","");
 			  let height = mutationList[0].addedNodes[0].style.height.replace("px","");
 			  let profile_pic = tmp_profile_pic[1].split("\n")[0];
