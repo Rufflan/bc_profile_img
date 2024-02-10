@@ -143,7 +143,6 @@ var callback = (mutationList, observer) => {
                                 }
 
                                 let calc_data = calc_position(100, 160, 1790, 750);
-                                let profile_pic = tmp_profile_pic[1].split("\n")[0];
                                 let tmp = document.createElement("style");
                                 tmp.setAttribute("id", "profile_img");
                                 tmp.innerHTML = 'div#bceRichOnlineProfile{width:' + calc_data.width + ' !important;height:' + calc_data.height + ' !important;top:' + calc_data.top + ' !important;left:' + calc_data.left + ' !important}';
