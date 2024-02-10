@@ -14,9 +14,13 @@ it is optimized for square images.
 ## caution(주의사항)
 
 
-바이오를 켠채로 창 크기가 변경되면 위치가 맞지 않습니다
+~~바이오를 켠채로 창 크기가 변경되면 위치가 맞지 않습니다~~
 
-while open description and resize the window, it can be break
+~~while open description and resize the window, it can be break~~
+
+수정되었습니다.
+
+it fixed!
 
 
 ## example(예시)
