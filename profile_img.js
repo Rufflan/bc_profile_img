@@ -69,91 +69,98 @@ function create_img_frame(tmp_profile_pic, text_nods, type) {
 var nods_observer;
 
 var callback = (mutationList, observer) => {
+    switch(mutationList.type){
+        case "childList" :
+            if (mutationList[0].addedNodes.length > 0) {
 
-    if (mutationList[0].addedNodes.length > 0) {
-
-        //console.log(mutationList);
-        //console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea");
-        //console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "DescriptionInput");
-
-        if (mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "DescriptionInput") {
-            let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
-            let tmp_profile_pic = mutationList[eval(mutationList.length) - 1].addedNodes[0].value.split("profiles pic:");
-            let nods_config = {
-                attributes: true,
-                childList: false,
-                characterData: false
-            };
-
-            nods_observer = new MutationObserver(function(mtl, ob) {
-                console.log(mtl[eval(mtl.length) - 1].type);
-                if (document.getElementById("profile_img")) {
-                    document.getElementById("profile_img").remove();
+                console.log(mutationList);
+                //console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea");
+                //console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "DescriptionInput");
+        
+                if (mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "DescriptionInput") {
+                    let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
+                    let tmp_profile_pic = mutationList[eval(mutationList.length) - 1].addedNodes[0].value.split("profiles pic:");
+                    let nods_config = {
+                        attributes: true,
+                        childList: false,
+                        characterData: false
+                    };
+        
+                    nods_observer = new MutationObserver(function(mtl, ob) {
+                        console.log(mtl[eval(mtl.length) - 1].type);
+                        if (document.getElementById("profile_img")) {
+                            document.getElementById("profile_img").remove();
+                        }
+                        if (document.getElementById("img_profile")) {
+                            document.getElementById("img_profile").remove();
+                        }
+                        if (mtl[eval(mtl.length) - 1].type == "attributes") {
+                            create_img_frame(tmp_profile_pic, text_nods, "textarea");
+                            //nods_observer.disconnect();
+                        }
+                    });
+        
+                    nods_observer.observe(document.getElementById("DescriptionInput"), nods_config);
+        
+                    //create_img_frame(tmp_profile_pic,text_nods);
+                } else if (mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "div" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "bceRichOnlineProfile") {
+                    //console.log("div");
+                    let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
+                    let tmp_profile_pic = {};
+                    if(mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img")){
+                        tmp_profile_pic[1] = mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img").src;
+                        if (document.getElementById("profile_img")) {
+                            document.getElementById("profile_img").remove();
+                        }
+                        if (document.getElementById("img_profile")) {
+                            document.getElementById("img_profile").remove();
+                        }
+                        create_img_frame(tmp_profile_pic, text_nods, "div");
+                    }
                 }
-                if (document.getElementById("img_profile")) {
-                    document.getElementById("img_profile").remove();
-                }
-                if (mtl[eval(mtl.length) - 1].type == "attributes") {
+            } else if (mutationList[eval(mutationList.length) - 1].removedNodes.length > 0) {
+                //console.log(mutationList);
+                if (mutationList[eval(mutationList.length) - 1].removedNodes[0].localName == "textarea" && mutationList[eval(mutationList.length) - 1].removedNodes[0].id == "DescriptionInput") {
+                    if (document.getElementById("profile_img")) {
+                        document.getElementById("profile_img").remove();
+                    }
+                    if (document.getElementById("img_profile")) {
+                        document.getElementById("img_profile").remove();
+                    }
+        
+                } else if (mutationList[eval(mutationList.length) - 1].removedNodes[0].localName == "div" && mutationList[eval(mutationList.length) - 1].removedNodes[0].id == "bceRichOnlineProfile") {
+                    //console.log(mutationList[eval(mutationList.length) - 1].previousSibling.id);
+                    let text_nods = document.getElementById("DescriptionInput");
+                    let tmp_profile_pic = document.getElementById("DescriptionInput").value.split("profiles pic:");
+                    if (document.getElementById("profile_img")) {
+                        document.getElementById("profile_img").remove();
+                    }
+                    if (document.getElementById("img_profile")) {
+                        document.getElementById("img_profile").remove();
+                    }
                     create_img_frame(tmp_profile_pic, text_nods, "textarea");
-                    //nods_observer.disconnect();
+                } else if (mutationList[eval(mutationList.length) - 1].removedNodes[0].localName == "img" && mutationList[eval(mutationList.length) - 1].removedNodes[0].id == "img_profile") {
+                    if (document.getElementById("profile_img")) {
+                        document.getElementById("profile_img").remove();
+                    }
+                    if (document.getElementById("img_profile")) {
+                        document.getElementById("img_profile").remove();
+                    }
                 }
-            });
-
-            nods_observer.observe(document.getElementById("DescriptionInput"), nods_config);
-
-            //create_img_frame(tmp_profile_pic,text_nods);
-        } else if (mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "div" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "bceRichOnlineProfile") {
-            //console.log("div");
-            let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
-            let tmp_profile_pic = {};
-            if(mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img")){
-                tmp_profile_pic[1] = mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img").src;
-                if (document.getElementById("profile_img")) {
-                    document.getElementById("profile_img").remove();
-                }
-                if (document.getElementById("img_profile")) {
-                    document.getElementById("img_profile").remove();
-                }
-                create_img_frame(tmp_profile_pic, text_nods, "div");
+                //nods_observer.disconnect();
             }
-        }
-    } else if (mutationList[eval(mutationList.length) - 1].removedNodes.length > 0) {
-        //console.log(mutationList);
-        if (mutationList[eval(mutationList.length) - 1].removedNodes[0].localName == "textarea" && mutationList[eval(mutationList.length) - 1].removedNodes[0].id == "DescriptionInput") {
-            if (document.getElementById("profile_img")) {
-                document.getElementById("profile_img").remove();
-            }
-            if (document.getElementById("img_profile")) {
-                document.getElementById("img_profile").remove();
-            }
-
-        } else if (mutationList[eval(mutationList.length) - 1].removedNodes[0].localName == "div" && mutationList[eval(mutationList.length) - 1].removedNodes[0].id == "bceRichOnlineProfile") {
-            //console.log(mutationList[eval(mutationList.length) - 1].previousSibling.id);
-            let text_nods = document.getElementById("DescriptionInput");
-            let tmp_profile_pic = document.getElementById("DescriptionInput").value.split("profiles pic:");
-            if (document.getElementById("profile_img")) {
-                document.getElementById("profile_img").remove();
-            }
-            if (document.getElementById("img_profile")) {
-                document.getElementById("img_profile").remove();
-            }
-            create_img_frame(tmp_profile_pic, text_nods, "textarea");
-        } else if (mutationList[eval(mutationList.length) - 1].removedNodes[0].localName == "img" && mutationList[eval(mutationList.length) - 1].removedNodes[0].id == "img_profile") {
-            if (document.getElementById("profile_img")) {
-                document.getElementById("profile_img").remove();
-            }
-            if (document.getElementById("img_profile")) {
-                document.getElementById("img_profile").remove();
-            }
-        }
-        //nods_observer.disconnect();
+            break;
+        case "attributes" :
+            console.log("attributes");
+            break;
     }
+    
 };
 
 var observer = new MutationObserver(callback);
 
 var config = {
-    attributes: false,
+    attributes: true,
     childList: true,
     characterData: false
 };
