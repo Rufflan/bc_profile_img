@@ -24,10 +24,31 @@ function calc_position(X, Y, W, H) {
 	return data;
 }
 
+function create_img_frame(tmp_profile_pic){
+	if(tmp_profile_pic.length > 1){
+		  let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
+		  let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
+		  let width = mutationList[0].addedNodes[0].style.width.replace("px","");
+		  let height = mutationList[0].addedNodes[0].style.height.replace("px","");
+		  let profile_pic = tmp_profile_pic[1].split("\n")[0];
+		  let tmp = document.createElement("style");
+		  tmp.setAttribute("id","profile_img");
+		  tmp.innerHTML = 'textarea#DescriptionInput{width:'+calc_data.width+' !important;}';
+		  document.head.append(tmp);
+	
+		  let tmp_img_section = document.createElement("img");
+		  tmp_img_section.setAttribute("id","img_profile");
+		  tmp_img_section.setAttribute("src",profile_pic);
+		  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;left: "+img_calc_data.left+";top: "+img_calc_data.top+";width: "+img_calc_data.width+";height: "+img_calc_data.height+";object-fit: cover;");
+		  document.body.append(tmp_img_section);
+	  }
+}
+
 var callback = (mutationList, observer) => {
   if(mutationList[0].addedNodes.length > 0){
   	if(mutationList[0].addedNodes[0].localName == "textarea"){
 		let text_nods = mutationList[0].addedNodes[0];
+		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
 
 		let nods_config = {
 		    attributes: true,
@@ -44,27 +65,12 @@ var callback = (mutationList, observer) => {
 			nods_observer.disconnect();
 		});
 
+		console.log(nods_observer);
+
 		nods_observer.observe(text_nods, nods_config);
-		
-		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
+		console.log(nods_observer);
 
-		  if(tmp_profile_pic.length > 1){
-			  let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
-			  let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
-			  let width = mutationList[0].addedNodes[0].style.width.replace("px","");
-			  let height = mutationList[0].addedNodes[0].style.height.replace("px","");
-			  let profile_pic = tmp_profile_pic[1].split("\n")[0];
-			  let tmp = document.createElement("style");
-			  tmp.setAttribute("id","profile_img");
-			  tmp.innerHTML = 'textarea#DescriptionInput{width:'+calc_data.width+' !important;}';
-			  document.head.append(tmp);
-
-			  let tmp_img_section = document.createElement("img");
-			  tmp_img_section.setAttribute("id","img_profile");
-			  tmp_img_section.setAttribute("src",profile_pic);
-			  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;left: "+img_calc_data.left+";top: "+img_calc_data.top+";width: "+img_calc_data.width+";height: "+img_calc_data.height+";object-fit: cover;");
-			  document.body.append(tmp_img_section);
-		  }
+		create_img_frame(tmp_profile_pic);
 	}else if(mutationList[0].addedNodes[0].localName != "img"){
 		if(document.getElementById("profile_img")){
 			document.getElementById("profile_img").remove();
