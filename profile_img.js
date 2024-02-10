@@ -134,12 +134,27 @@ var callback = (mutationList, observer) => {
                             }
                             create_img_frame(tmp_profile_pic, text_nods, "div");
                         }else{
-                            let calc_data = calc_position(100, 160, 1790, 750);
-                            let profile_pic = tmp_profile_pic[1].split("\n")[0];
-                            let tmp = document.createElement("style");
-                            tmp.setAttribute("id", "profile_img");
-                            tmp.innerHTML = 'div#bceRichOnlineProfile{width:' + calc_data.width + ' !important;height:' + calc_data.height + ' !important;top:' + calc_data.top + ' !important;left:' + calc_data.left + ' !important}';
-                            document.head.append(tmp);
+                            let callback = (entries, observer) => {
+                                if (document.getElementById("profile_img")) {
+                                    document.getElementById("profile_img").remove();
+                                }
+                                if (document.getElementById("img_profile")) {
+                                    document.getElementById("img_profile").remove();
+                                }
+
+                                let calc_data = calc_position(100, 160, 1790, 750);
+                                let profile_pic = tmp_profile_pic[1].split("\n")[0];
+                                let tmp = document.createElement("style");
+                                tmp.setAttribute("id", "profile_img");
+                                tmp.innerHTML = 'div#bceRichOnlineProfile{width:' + calc_data.width + ' !important;height:' + calc_data.height + ' !important;top:' + calc_data.top + ' !important;left:' + calc_data.left + ' !important}';
+                                document.head.append(tmp);
+                            };
+                            if(resize_observer){
+                                resize_observer.disconnect();
+                            }
+                            resize_observer = new ResizeObserver(callback);
+                            let el = document.getElementById('MainCanvas');
+                            resize_observer.observe(el);
                         }
                     }
                 }
