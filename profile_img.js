@@ -43,7 +43,7 @@ function create_img_frame(tmp_profile_pic,text_nods){
 		  document.body.append(tmp_img_section);
 	  }
 }
-let nods_observer;
+var nods_observer;
 
 var callback = (mutationList, observer) => {
   if(mutationList[0].addedNodes.length > 0){
