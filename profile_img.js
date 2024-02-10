@@ -69,7 +69,8 @@ function create_img_frame(tmp_profile_pic, text_nods, type) {
 var nods_observer;
 
 var callback = (mutationList, observer) => {
-    switch(mutationList.type){
+    console.log(mutationList);
+    switch(mutationList[0].type){
         case "childList" :
             if (mutationList[0].addedNodes.length > 0) {
 
