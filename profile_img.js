@@ -24,35 +24,46 @@ function calc_position(X, Y, W, H) {
 	return data;
 }
 
-function create_img_frame(tmp_profile_pic,text_nods){
-	if(tmp_profile_pic.length > 1){
-		  let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
-		  let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
-		  let width = text_nods.style.width.replace("px","");
-		  let height = text_nods.style.height.replace("px","");
-		  let profile_pic = tmp_profile_pic[1].split("\n")[0];
-		  let tmp = document.createElement("style");
-		  tmp.setAttribute("id","profile_img");
-		  tmp.innerHTML = 'textarea#DescriptionInput{width:'+calc_data.width+' !important;}';
-		  document.head.append(tmp);
+function create_img_frame(tmp_profile_pic,text_nods,type){
 	
-		  let tmp_img_section = document.createElement("img");
-		  tmp_img_section.setAttribute("id","img_profile");
-		  tmp_img_section.setAttribute("src",profile_pic);
-		  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;left: "+img_calc_data.left+";top: "+img_calc_data.top+";width: "+img_calc_data.width+";height: "+img_calc_data.height+";object-fit: cover;");
-		  document.body.append(tmp_img_section);
-	  }
+		switch(type){
+			case "textarea" :
+				if(tmp_profile_pic.length > 1){
+					let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
+					  let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
+					  let width = text_nods.style.width.replace("px","");
+					  let height = text_nods.style.height.replace("px","");
+					  let profile_pic = tmp_profile_pic[1].split("\n")[0];
+					  let tmp = document.createElement("style");
+					  tmp.setAttribute("id","profile_img");
+					  tmp.innerHTML = 'textarea#DescriptionInput{width:'+calc_data.width+' !important;}';
+					  document.head.append(tmp);
+				
+					  let tmp_img_section = document.createElement("img");
+					  tmp_img_section.setAttribute("id","img_profile");
+					  tmp_img_section.setAttribute("src",profile_pic);
+					  tmp_img_section.setAttribute("style","z-index: 99;position: absolute;left: "+img_calc_data.left+";top: "+img_calc_data.top+";width: "+img_calc_data.width+";height: "+img_calc_data.height+";object-fit: cover;");
+					  document.body.append(tmp_img_section);
+				  }
+				break;
+			case "div" :
+				console.log("create frame div");
+				break;
+		}
 }
 var nods_observer;
 
 var callback = (mutationList, observer) => {
+	
   if(mutationList[0].addedNodes.length > 0){
 	
-	  //console.log(mutationList);
+	  console.log(mutationList);
+	  console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea");
+	  console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].id=="DescriptionInput");
 	  
-  	if(mutationList[0].addedNodes[0].localName == "textarea" && mutationList[0].addedNodes[0].id=="DescriptionInput"){
-		let text_nods = mutationList[0].addedNodes[0];
-		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
+  	if(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id=="DescriptionInput"){
+		let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
+		let tmp_profile_pic = mutationList[eval(mutationList.length) - 1].addedNodes[0].value.split("profiles pic:");
 		let nods_config = {
 			attributes: true,
 			childList: false,
@@ -68,7 +79,7 @@ var callback = (mutationList, observer) => {
 				document.getElementById("img_profile").remove();
 			}
 			if(mtl[eval(mtl.length) - 1].type == "attributes"){
-				create_img_frame(tmp_profile_pic,text_nods);
+				create_img_frame(tmp_profile_pic,text_nods,"textarea");
 				//nods_observer.disconnect();
 			}
 		});
@@ -76,9 +87,36 @@ var callback = (mutationList, observer) => {
 		nods_observer.observe(document.getElementById("DescriptionInput"), nods_config);
 		
 		//create_img_frame(tmp_profile_pic,text_nods);
-	}
-  }else if(mutationList[0].removedNodes.length > 0){
-	  if(mutationList[0].removedNodes[0].localName == "textarea" && mutationList[0].removedNodes[0].id=="DescriptionInput"){
+	}else if(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "div" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id=="bceRichOnlineProfile"){
+		  console.log("div");
+			let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
+			let tmp_profile_pic = {};
+			tmp_profile_pic[1] = mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img").src;
+
+			let nods_config = {
+				attributes: true,
+				childList: false,
+				characterData: false
+			};
+			
+			nods_observer = new MutationObserver(function(mtl,ob){
+				console.log(mtl[eval(mtl.length) - 1].type);
+				if(document.getElementById("profile_img")){
+					document.getElementById("profile_img").remove();
+				}
+				if(document.getElementById("img_profile")){
+					document.getElementById("img_profile").remove();
+				}
+				if(mtl[eval(mtl.length) - 1].type == "attributes"){
+					create_img_frame(tmp_profile_pic,text_nods,"div");
+					//nods_observer.disconnect();
+				}
+			});
+			
+			nods_observer.observe(document.getElementById("bceRichOnlineProfile"), nods_config);
+	  }
+  }else if(mutationList[eval(mutationList.length) - 1].removedNodes.length > 0){
+	  if(mutationList[eval(mutationList.length) - 1].removedNodes[0].localName == "textarea" && mutationList[eval(mutationList.length) - 1].removedNodes[0].id=="DescriptionInput"){
 		  if(document.getElementById("profile_img")){
 			document.getElementById("profile_img").remove();
 		}
