@@ -144,8 +144,20 @@ var callback = (mutationList, observer) => {
                     //console.log(mutationList[eval(mutationList.length) - 1].previousSibling.id);
                     let text_nods = document.getElementById("DescriptionInput");
                     let tmp_profile_pic = document.getElementById("DescriptionInput").value.split("profiles pic:");
-
-                    let callback = (entries, observer) => {
+                    if(tmp_profile_pic.length > 1){
+                        let callback = (entries, observer) => {
+                            if (document.getElementById("profile_img")) {
+                                document.getElementById("profile_img").remove();
+                            }
+                            if (document.getElementById("img_profile")) {
+                                document.getElementById("img_profile").remove();
+                            }
+                            create_img_frame(tmp_profile_pic, text_nods, "textarea");
+                        };
+                        let observer = new ResizeObserver(callback);
+                        let el = document.getElementById('MainCanvas');
+                        observer.observe(el);
+    
                         if (document.getElementById("profile_img")) {
                             document.getElementById("profile_img").remove();
                         }
@@ -153,18 +165,7 @@ var callback = (mutationList, observer) => {
                             document.getElementById("img_profile").remove();
                         }
                         create_img_frame(tmp_profile_pic, text_nods, "textarea");
-                    };
-                    let observer = new ResizeObserver(callback);
-                    let el = document.getElementById('MainCanvas');
-                    observer.observe(el);
-
-                    if (document.getElementById("profile_img")) {
-                        document.getElementById("profile_img").remove();
                     }
-                    if (document.getElementById("img_profile")) {
-                        document.getElementById("img_profile").remove();
-                    }
-                    create_img_frame(tmp_profile_pic, text_nods, "textarea");
                 } else if (mutationList[eval(mutationList.length) - 1].removedNodes[0].localName == "img" && mutationList[eval(mutationList.length) - 1].removedNodes[0].id == "img_profile") {
                     if (document.getElementById("profile_img")) {
                         document.getElementById("profile_img").remove();
