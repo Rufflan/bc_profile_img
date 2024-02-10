@@ -64,7 +64,7 @@ function create_img_frame(tmp_profile_pic, text_nods, type) {
             break;
     }
 }
-var nods_observer;
+var resize_observer;
 
 var callback = (mutationList, observer) => {
     //console.log(mutationList);
@@ -90,9 +90,9 @@ var callback = (mutationList, observer) => {
                                 }
                                 create_img_frame(tmp_profile_pic, text_nods, "textarea");
                             };
-                            let observer = new ResizeObserver(callback);
+                            let resize_observer = new ResizeObserver(callback);
                             let el = document.getElementById('MainCanvas');
-                            observer.observe(el);
+                            resize_observer.observe(el);
         
                             if (document.getElementById("profile_img")) {
                                 document.getElementById("profile_img").remove();
@@ -116,9 +116,9 @@ var callback = (mutationList, observer) => {
                                 }
                                 create_img_frame(tmp_profile_pic, text_nods, "div");
                             };
-                            let observer = new ResizeObserver(callback);
+                            let resize_observer = new ResizeObserver(callback);
                             let el = document.getElementById('MainCanvas');
-                            observer.observe(el);
+                            resize_observer.observe(el);
     
                             if (document.getElementById("profile_img")) {
                                 document.getElementById("profile_img").remove();
@@ -139,6 +139,7 @@ var callback = (mutationList, observer) => {
                     if (document.getElementById("img_profile")) {
                         document.getElementById("img_profile").remove();
                     }
+                    resize_observer.disconnect();
         
                 } else if (mutationList[eval(mutationList.length) - 1].removedNodes[0].localName == "div" && mutationList[eval(mutationList.length) - 1].removedNodes[0].id == "bceRichOnlineProfile") {
                     //console.log(mutationList[eval(mutationList.length) - 1].previousSibling.id);
@@ -154,9 +155,9 @@ var callback = (mutationList, observer) => {
                             }
                             create_img_frame(tmp_profile_pic, text_nods, "textarea");
                         };
-                        let observer = new ResizeObserver(callback);
+                        let resize_observer = new ResizeObserver(callback);
                         let el = document.getElementById('MainCanvas');
-                        observer.observe(el);
+                        resize_observer.observe(el);
     
                         if (document.getElementById("profile_img")) {
                             document.getElementById("profile_img").remove();
@@ -173,6 +174,7 @@ var callback = (mutationList, observer) => {
                     if (document.getElementById("img_profile")) {
                         document.getElementById("img_profile").remove();
                     }
+                    resize_observer.disconnect();
                 }
                 //nods_observer.disconnect();
             }
