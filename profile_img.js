@@ -50,7 +50,7 @@ var callback = (mutationList, observer) => {
 	
 	  console.log(mutationList);
 	  
-  	if(mutationList[0].addedNodes[0].localName == "textarea"){
+  	if(mutationList[0].addedNodes[0].localName == "textarea" && mutationList[0].addedNodes[0].id=="DescriptionInput"){
 		let text_nods = mutationList[0].addedNodes[0];
 		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
 		if(!nods_observer){
