@@ -53,29 +53,27 @@ var callback = (mutationList, observer) => {
   	if(mutationList[0].addedNodes[0].localName == "textarea" && mutationList[0].addedNodes[0].id=="DescriptionInput"){
 		let text_nods = mutationList[0].addedNodes[0];
 		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
-		if(!nods_observer){
-			let nods_config = {
-				attributes: true,
-				childList: false,
-				characterData: false
-			};
-			
-			nods_observer = new MutationObserver(function(mtl,ob){
-				console.log(mtl[eval(mtl.length) - 1].type);
-				if(document.getElementById("profile_img")){
-					document.getElementById("profile_img").remove();
-				}
-				if(document.getElementById("img_profile")){
-					document.getElementById("img_profile").remove();
-				}
-				if(mtl[eval(mtl.length) - 1].type == "attributes"){
-					create_img_frame(tmp_profile_pic,text_nods);
-					//nods_observer.disconnect();
-				}
-			});
-			
-			nods_observer.observe(document.getElementById("DescriptionInput"), nods_config);
-		}
+		let nods_config = {
+			attributes: true,
+			childList: false,
+			characterData: false
+		};
+		
+		nods_observer = new MutationObserver(function(mtl,ob){
+			console.log(mtl[eval(mtl.length) - 1].type);
+			if(document.getElementById("profile_img")){
+				document.getElementById("profile_img").remove();
+			}
+			if(document.getElementById("img_profile")){
+				document.getElementById("img_profile").remove();
+			}
+			if(mtl[eval(mtl.length) - 1].type == "attributes"){
+				create_img_frame(tmp_profile_pic,text_nods);
+				//nods_observer.disconnect();
+			}
+		});
+		
+		nods_observer.observe(document.getElementById("DescriptionInput"), nods_config);
 		
 		//create_img_frame(tmp_profile_pic,text_nods);
 	}else if(mutationList[0].addedNodes[0].localName != "img"){
