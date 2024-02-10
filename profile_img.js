@@ -96,7 +96,7 @@ var observer = new MutationObserver(callback);
 var config = {
     attributes: false,
     childList: true,
-    characterData: true
+    characterData: false
 };
 observer.observe(target, config);
 /*
