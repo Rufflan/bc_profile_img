@@ -90,6 +90,9 @@ var callback = (mutationList, observer) => {
                                 }
                                 create_img_frame(tmp_profile_pic, text_nods, "textarea");
                             };
+                            if(resize_observer){
+                                resize_observer.disconnect();
+                            }
                             resize_observer = new ResizeObserver(callback);
                             let el = document.getElementById('MainCanvas');
                             resize_observer.observe(el);
@@ -116,6 +119,9 @@ var callback = (mutationList, observer) => {
                                 }
                                 create_img_frame(tmp_profile_pic, text_nods, "div");
                             };
+                            if(resize_observer){
+                                resize_observer.disconnect();
+                            }
                             resize_observer = new ResizeObserver(callback);
                             let el = document.getElementById('MainCanvas');
                             resize_observer.observe(el);
@@ -155,6 +161,9 @@ var callback = (mutationList, observer) => {
                             }
                             create_img_frame(tmp_profile_pic, text_nods, "textarea");
                         };
+                        if(resize_observer){
+                            resize_observer.disconnect();
+                        }
                         resize_observer = new ResizeObserver(callback);
                         let el = document.getElementById('MainCanvas');
                         resize_observer.observe(el);
