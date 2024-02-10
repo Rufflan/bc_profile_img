@@ -48,7 +48,7 @@ var nods_observer;
 var callback = (mutationList, observer) => {
   if(mutationList[0].addedNodes.length > 0){
 	
-	  console.log(mutationList);
+	  //console.log(mutationList);
 	  
   	if(mutationList[0].addedNodes[0].localName == "textarea" && mutationList[0].addedNodes[0].id=="DescriptionInput"){
 		let text_nods = mutationList[0].addedNodes[0];
@@ -76,24 +76,17 @@ var callback = (mutationList, observer) => {
 		nods_observer.observe(document.getElementById("DescriptionInput"), nods_config);
 		
 		//create_img_frame(tmp_profile_pic,text_nods);
-	}else if(mutationList[0].addedNodes[0].localName != "img"){
-		if(document.getElementById("profile_img")){
+	}
+  }else if(mutationList[0].removedNodes.length > 0){
+	  if(mutationList[0].removedNodes[0].localName == "textarea" && mutationList[0].removedNodes[0].id=="DescriptionInput"){
+		  if(document.getElementById("profile_img")){
 			document.getElementById("profile_img").remove();
 		}
 		if(document.getElementById("img_profile")){
 			document.getElementById("img_profile").remove();
 		}
 
-		//nods_observer.disconnect();
-	}
-  }else{
-	if(document.getElementById("profile_img")){
-		document.getElementById("profile_img").remove();
-	}
-	if(document.getElementById("img_profile")){
-		document.getElementById("img_profile").remove();
-	}
-
+	  }
 	  //nods_observer.disconnect();
   }
 };
