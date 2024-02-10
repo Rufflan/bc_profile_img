@@ -46,30 +46,14 @@ function create_img_frame(tmp_profile_pic,mutationList){
 
 var callback = (mutationList, observer) => {
   if(mutationList[0].addedNodes.length > 0){
+	
+	  console.log(mutationList);
+	  
   	if(mutationList[0].addedNodes[0].localName == "textarea"){
 		let text_nods = mutationList[0].addedNodes[0];
 		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
 
-		let nods_config = {
-		    attributes: true,
-		    childList: false,
-		    characterData: false
-		};
-
-		let nods_observer = new MutationObserver(function(mtl,ob){
-			console.log(mtl);
-			console.log(mtl.length);
-			console.log(mtl[eval(mtl.length) - 1]);
-			console.log(eval(mtl.length) - 1);
-			console.log(nods_observer);
-			nods_observer.disconnect();
-		});
-
-		console.log(nods_observer);
-
-		nods_observer.observe(text_nods, nods_config);
-		console.log(nods_observer);
-
+		//create_img_frame(tmp_profile_pic,mutationList);
 		create_img_frame(tmp_profile_pic,mutationList);
 	}else if(mutationList[0].addedNodes[0].localName != "img"){
 		if(document.getElementById("profile_img")){
@@ -78,6 +62,8 @@ var callback = (mutationList, observer) => {
 		if(document.getElementById("img_profile")){
 			document.getElementById("img_profile").remove();
 		}
+
+		//nods_observer.disconnect();
 	}
   }else{
 	if(document.getElementById("profile_img")){
@@ -86,6 +72,8 @@ var callback = (mutationList, observer) => {
 	if(document.getElementById("img_profile")){
 		document.getElementById("img_profile").remove();
 	}
+
+	  //nods_observer.disconnect();
   }
 };
 
@@ -98,5 +86,26 @@ var config = {
 };
 observer.observe(target, config);
 
+let nods_config = {
+	attributes: true,
+	childList: false,
+	characterData: false
+};
 
+let nods_observer = new MutationObserver(function(mtl,ob){
+	console.log(mtl[eval(mtl.length) - 1].type);
+	if(document.getElementById("profile_img")){
+		document.getElementById("profile_img").remove();
+	}
+	if(document.getElementById("img_profile")){
+		document.getElementById("img_profile").remove();
+	}
+	if(mtl[eval(mtl.length) - 1].type == "attributes"){
+		console.log("test");
+		
+		//nods_observer.disconnect();
+	}
+});
+
+nods_observer.observe(text_nods, nods_config);
 //observer.disconnect();
