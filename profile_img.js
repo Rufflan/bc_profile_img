@@ -31,8 +31,8 @@ function create_img_frame(tmp_profile_pic, text_nods, type) {
             if (tmp_profile_pic.length > 1) {
                 let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
                 let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
-                let width = text_nods.style.width.replace("px", "");
-                let height = text_nods.style.height.replace("px", "");
+                //let width = text_nods.style.width.replace("px", "");
+                //let height = text_nods.style.height.replace("px", "");
                 let profile_pic = tmp_profile_pic[1].split("\n")[0];
                 let tmp = document.createElement("style");
                 tmp.setAttribute("id", "profile_img");
@@ -50,12 +50,10 @@ function create_img_frame(tmp_profile_pic, text_nods, type) {
             //console.log("create frame div");
             let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
             let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
-            let width = text_nods.style.width.replace("px", "");
-            let height = text_nods.style.height.replace("px", "");
             let profile_pic = tmp_profile_pic[1].split("\n")[0];
             let tmp = document.createElement("style");
             tmp.setAttribute("id", "profile_img");
-            tmp.innerHTML = 'div#bceRichOnlineProfile{width:' + calc_data.width + ' !important;}';
+            tmp.innerHTML = 'div#bceRichOnlineProfile{width:' + calc_data.width + ' !important;height:' + calc_data.height + ' !important;top:' + calc_data.top + ' !important;left:' + calc_data.left + ' !important}';
             document.head.append(tmp);
 
             let tmp_img_section = document.createElement("img");
@@ -69,12 +67,12 @@ function create_img_frame(tmp_profile_pic, text_nods, type) {
 var nods_observer;
 
 var callback = (mutationList, observer) => {
-    console.log(mutationList);
+    //console.log(mutationList);
     switch(mutationList[0].type){
         case "childList" :
             if (mutationList[0].addedNodes.length > 0) {
 
-                console.log(mutationList);
+                //console.log(mutationList);
                 //console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea");
                 //console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "DescriptionInput");
         
