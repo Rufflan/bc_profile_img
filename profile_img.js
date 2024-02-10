@@ -27,6 +27,25 @@ function calc_position(X, Y, W, H) {
 var callback = (mutationList, observer) => {
   if(mutationList[0].addedNodes.length > 0){
   	if(mutationList[0].addedNodes[0].localName == "textarea"){
+		let text_nods = mutationList[0].addedNodes[0];
+
+		let nods_config = {
+		    attributes: true,
+		    childList: false,
+		    characterData: false
+		};
+
+		let nods_observer = new MutationObserver(function(mtl,ob){
+			console.log(mtl);
+			console.log(mtl.length);
+			console.log(mtl[eval(mtl.length) - 1]);
+			console.log(eval(mtl.length) - 1);
+
+			nods_observer.disconnect();
+		});
+
+		nods_observer.observe(text_nods, nods_config);
+		
 		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
 
 		  if(tmp_profile_pic.length > 1){
