@@ -61,7 +61,7 @@ var callback = (mutationList, observer) => {
 			console.log(mtl.length);
 			console.log(mtl[eval(mtl.length) - 1]);
 			console.log(eval(mtl.length) - 1);
-
+			console.log(nods_observer);
 			nods_observer.disconnect();
 		});
 
