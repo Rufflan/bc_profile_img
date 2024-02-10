@@ -24,12 +24,12 @@ function calc_position(X, Y, W, H) {
 	return data;
 }
 
-function create_img_frame(tmp_profile_pic,mutationList){
+function create_img_frame(tmp_profile_pic,text_nods){
 	if(tmp_profile_pic.length > 1){
 		  let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
 		  let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
-		  let width = mutationList[0].addedNodes[0].style.width.replace("px","");
-		  let height = mutationList[0].addedNodes[0].style.height.replace("px","");
+		  let width = text_nods.style.width.replace("px","");
+		  let height = text_nods.style.height.replace("px","");
 		  let profile_pic = tmp_profile_pic[1].split("\n")[0];
 		  let tmp = document.createElement("style");
 		  tmp.setAttribute("id","profile_img");
@@ -54,7 +54,7 @@ var callback = (mutationList, observer) => {
 		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
 
 		//create_img_frame(tmp_profile_pic,mutationList);
-		create_img_frame(tmp_profile_pic,mutationList);
+		create_img_frame(tmp_profile_pic,text_nods);
 	}else if(mutationList[0].addedNodes[0].localName != "img"){
 		if(document.getElementById("profile_img")){
 			document.getElementById("profile_img").remove();
@@ -101,11 +101,12 @@ let nods_observer = new MutationObserver(function(mtl,ob){
 		document.getElementById("img_profile").remove();
 	}
 	if(mtl[eval(mtl.length) - 1].type == "attributes"){
-		console.log("test");
-		
+		let text_nods = document.getElementById("DescriptionInput");
+		let tmp_profile_pic = text_nods.value.split("profiles pic:");
+		create_img_frame(tmp_profile_pic,text_nods);
 		//nods_observer.disconnect();
 	}
 });
 
-nods_observer.observe(text_nods, nods_config);
+nods_observer.observe(document.getElementById("DescriptionInput"), nods_config);
 //observer.disconnect();
