@@ -33,7 +33,7 @@ function create_img_frame(tmp_profile_pic,text_nods){
 		  let profile_pic = tmp_profile_pic[1].split("\n")[0];
 		  let tmp = document.createElement("style");
 		  tmp.setAttribute("id","profile_img");
-		  tmp.innerHTML = 'div#bceRichOnlineProfile{width:'+calc_data.width+' !important;}';
+		  tmp.innerHTML = 'textarea#DescriptionInput{width:'+calc_data.width+' !important;}';
 		  document.head.append(tmp);
 	
 		  let tmp_img_section = document.createElement("img");
@@ -50,7 +50,7 @@ var callback = (mutationList, observer) => {
 	
 	  //console.log(mutationList);
 	  
-  	if(mutationList[0].addedNodes[0].localName == "div" && mutationList[0].addedNodes[0].id=="bceRichOnlineProfile"){
+  	if(mutationList[0].addedNodes[0].localName == "textarea" && mutationList[0].addedNodes[0].id=="DescriptionInput"){
 		let text_nods = mutationList[0].addedNodes[0];
 		let tmp_profile_pic = mutationList[0].addedNodes[0].value.split("profiles pic:");
 		let nods_config = {
