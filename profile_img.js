@@ -106,15 +106,16 @@ var callback = (mutationList, observer) => {
             //console.log("div");
             let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
             let tmp_profile_pic = {};
-            tmp_profile_pic[1] = mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img").src;
-
-            if (document.getElementById("profile_img")) {
-                document.getElementById("profile_img").remove();
+            if(mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img")){
+                tmp_profile_pic[1] = mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img").src;
+                if (document.getElementById("profile_img")) {
+                    document.getElementById("profile_img").remove();
+                }
+                if (document.getElementById("img_profile")) {
+                    document.getElementById("img_profile").remove();
+                }
+                create_img_frame(tmp_profile_pic, text_nods, "div");
             }
-            if (document.getElementById("img_profile")) {
-                document.getElementById("img_profile").remove();
-            }
-            create_img_frame(tmp_profile_pic, text_nods, "div");
         }
     } else if (mutationList[eval(mutationList.length) - 1].removedNodes.length > 0) {
         //console.log(mutationList);
