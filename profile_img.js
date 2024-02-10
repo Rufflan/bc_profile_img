@@ -75,61 +75,12 @@ var callback = (mutationList, observer) => {
                 //console.log(mutationList);
                 //console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea");
                 //console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "DescriptionInput");
-        
-                if (mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "DescriptionInput") {
-                    let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
-                    let tmp_profile_pic = mutationList[eval(mutationList.length) - 1].addedNodes[0].value.split("profiles pic:");
-
-
-                    let callback = (entries, observer) => {
-                        if (document.getElementById("profile_img")) {
-                            document.getElementById("profile_img").remove();
-                        }
-                        if (document.getElementById("img_profile")) {
-                            document.getElementById("img_profile").remove();
-                        }
-                        create_img_frame(tmp_profile_pic, text_nods, "textarea");
-                    };
-                    let observer = new ResizeObserver(callback);
-                    let el = document.getElementById('MainCanvas');
-                    observer.observe(el);
-
-                    if (document.getElementById("profile_img")) {
-                        document.getElementById("profile_img").remove();
-                    }
-                    if (document.getElementById("img_profile")) {
-                        document.getElementById("img_profile").remove();
-                    }
-                    create_img_frame(tmp_profile_pic, text_nods, "textarea");
-                    /*
-                    let nods_config = {
-                        attributes: true,
-                        childList: false,
-                        characterData: false
-                    };
-        
-                    nods_observer = new MutationObserver(function(mtl, ob) {
-                        console.log(mtl[eval(mtl.length) - 1].type);
-                        if (document.getElementById("profile_img")) {
-                            document.getElementById("profile_img").remove();
-                        }
-                        if (document.getElementById("img_profile")) {
-                            document.getElementById("img_profile").remove();
-                        }
-                        if (mtl[eval(mtl.length) - 1].type == "attributes") {
-                            create_img_frame(tmp_profile_pic, text_nods, "textarea");
-                            //nods_observer.disconnect();
-                        }
-                    });
-        
-                    nods_observer.observe(document.getElementById("DescriptionInput"), nods_config);
-                    */
-                } else if (mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "div" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "bceRichOnlineProfile") {
-                    //console.log("div");
-                    let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
-                    let tmp_profile_pic = {};
-                    if(mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img")){
-                        tmp_profile_pic[1] = mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img").src;
+                if(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName){
+                    if (mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "DescriptionInput") {
+                        let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
+                        let tmp_profile_pic = mutationList[eval(mutationList.length) - 1].addedNodes[0].value.split("profiles pic:");
+    
+    
                         let callback = (entries, observer) => {
                             if (document.getElementById("profile_img")) {
                                 document.getElementById("profile_img").remove();
@@ -137,19 +88,69 @@ var callback = (mutationList, observer) => {
                             if (document.getElementById("img_profile")) {
                                 document.getElementById("img_profile").remove();
                             }
-                            create_img_frame(tmp_profile_pic, text_nods, "div");
+                            create_img_frame(tmp_profile_pic, text_nods, "textarea");
                         };
                         let observer = new ResizeObserver(callback);
                         let el = document.getElementById('MainCanvas');
                         observer.observe(el);
-
+    
                         if (document.getElementById("profile_img")) {
                             document.getElementById("profile_img").remove();
                         }
                         if (document.getElementById("img_profile")) {
                             document.getElementById("img_profile").remove();
                         }
-                        create_img_frame(tmp_profile_pic, text_nods, "div");
+                        create_img_frame(tmp_profile_pic, text_nods, "textarea");
+                        /*
+                        let nods_config = {
+                            attributes: true,
+                            childList: false,
+                            characterData: false
+                        };
+            
+                        nods_observer = new MutationObserver(function(mtl, ob) {
+                            console.log(mtl[eval(mtl.length) - 1].type);
+                            if (document.getElementById("profile_img")) {
+                                document.getElementById("profile_img").remove();
+                            }
+                            if (document.getElementById("img_profile")) {
+                                document.getElementById("img_profile").remove();
+                            }
+                            if (mtl[eval(mtl.length) - 1].type == "attributes") {
+                                create_img_frame(tmp_profile_pic, text_nods, "textarea");
+                                //nods_observer.disconnect();
+                            }
+                        });
+            
+                        nods_observer.observe(document.getElementById("DescriptionInput"), nods_config);
+                        */
+                    } else if (mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "div" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "bceRichOnlineProfile") {
+                        //console.log("div");
+                        let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
+                        let tmp_profile_pic = {};
+                        if(mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img")){
+                            tmp_profile_pic[1] = mutationList[eval(mutationList.length) - 1].addedNodes[0].querySelector("img").src;
+                            let callback = (entries, observer) => {
+                                if (document.getElementById("profile_img")) {
+                                    document.getElementById("profile_img").remove();
+                                }
+                                if (document.getElementById("img_profile")) {
+                                    document.getElementById("img_profile").remove();
+                                }
+                                create_img_frame(tmp_profile_pic, text_nods, "div");
+                            };
+                            let observer = new ResizeObserver(callback);
+                            let el = document.getElementById('MainCanvas');
+                            observer.observe(el);
+    
+                            if (document.getElementById("profile_img")) {
+                                document.getElementById("profile_img").remove();
+                            }
+                            if (document.getElementById("img_profile")) {
+                                document.getElementById("img_profile").remove();
+                            }
+                            create_img_frame(tmp_profile_pic, text_nods, "div");
+                        }
                     }
                 }
             } else if (mutationList[eval(mutationList.length) - 1].removedNodes.length > 0) {
@@ -234,7 +235,7 @@ var config = {
     attributes: false,
     childList: true,
     characterData: false,
-    subtree: true
+    subtree: false
 };
 observer.observe(target, config);
 /*
