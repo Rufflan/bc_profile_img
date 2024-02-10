@@ -24,7 +24,7 @@ function calc_position(X, Y, W, H) {
 	return data;
 }
 
-function create_img_frame(tmp_profile_pic){
+function create_img_frame(tmp_profile_pic,mutationList){
 	if(tmp_profile_pic.length > 1){
 		  let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
 		  let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
@@ -70,7 +70,7 @@ var callback = (mutationList, observer) => {
 		nods_observer.observe(text_nods, nods_config);
 		console.log(nods_observer);
 
-		create_img_frame(tmp_profile_pic);
+		create_img_frame(tmp_profile_pic,mutationList);
 	}else if(mutationList[0].addedNodes[0].localName != "img"){
 		if(document.getElementById("profile_img")){
 			document.getElementById("profile_img").remove();
