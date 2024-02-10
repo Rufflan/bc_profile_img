@@ -150,7 +150,7 @@ var callback = (mutationList, observer) => {
                 //nods_observer.disconnect();
             }
             break;
-        case "attributes" :
+        case "subtree" :
             console.log("attributes");
             break;
     }
@@ -160,9 +160,10 @@ var callback = (mutationList, observer) => {
 var observer = new MutationObserver(callback);
 
 var config = {
-    attributes: true,
+    attributes: false,
     childList: true,
-    characterData: false
+    characterData: false,
+    subtree: true
 };
 observer.observe(target, config);
 /*
