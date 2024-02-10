@@ -81,6 +81,29 @@ var callback = (mutationList, observer) => {
                 if (mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "DescriptionInput") {
                     let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
                     let tmp_profile_pic = mutationList[eval(mutationList.length) - 1].addedNodes[0].value.split("profiles pic:");
+
+
+                    let callback = (entries, observer) => {
+                        if (document.getElementById("profile_img")) {
+                            document.getElementById("profile_img").remove();
+                        }
+                        if (document.getElementById("img_profile")) {
+                            document.getElementById("img_profile").remove();
+                        }
+                        create_img_frame(tmp_profile_pic, text_nods, "textarea");
+                    };
+                    let observer = new ResizeObserver(callback);
+                    let el = document.getElementById('MainCanvas');
+                    observer.observe(el);
+
+                    if (document.getElementById("profile_img")) {
+                        document.getElementById("profile_img").remove();
+                    }
+                    if (document.getElementById("img_profile")) {
+                        document.getElementById("img_profile").remove();
+                    }
+                    create_img_frame(tmp_profile_pic, text_nods, "textarea");
+                    /*
                     let nods_config = {
                         attributes: true,
                         childList: false,
@@ -102,8 +125,7 @@ var callback = (mutationList, observer) => {
                     });
         
                     nods_observer.observe(document.getElementById("DescriptionInput"), nods_config);
-        
-                    //create_img_frame(tmp_profile_pic,text_nods);
+                    */
                 } else if (mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "div" && mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "bceRichOnlineProfile") {
                     //console.log("div");
                     let text_nods = mutationList[eval(mutationList.length) - 1].addedNodes[0];
@@ -121,6 +143,7 @@ var callback = (mutationList, observer) => {
                         };
                         let observer = new ResizeObserver(callback);
                         let el = document.getElementById('MainCanvas');
+                        observer.observe(el);
 
                         if (document.getElementById("profile_img")) {
                             document.getElementById("profile_img").remove();
