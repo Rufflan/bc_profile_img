@@ -70,7 +70,7 @@ var callback = (mutationList, observer) => {
     //console.log(mutationList);
     switch(mutationList[0].type){
         case "childList" :
-            mutationList.forEach(function(v,k){
+            mutationList.some(function(v,k){
                 if(v.addedNodes.length > 0){
                     console.log(mutationList);
 					//console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea");
@@ -105,6 +105,8 @@ var callback = (mutationList, observer) => {
 								}
 								create_img_frame(tmp_profile_pic, text_nods, "textarea");
 							}
+
+							return true;
 						} else if (v.addedNodes[0].localName == "div" && v.addedNodes[0].id == "bceRichOnlineProfile") {
 							//console.log("div");
 							let text_nods = v.addedNodes[0];
@@ -155,7 +157,10 @@ var callback = (mutationList, observer) => {
 								let el = document.getElementById('MainCanvas');
 								resize_observer.observe(el);
 							}
+
+							return true;
 						}
+
 					}
                 }else if (v.removedNodes.length > 0) {
 					//console.log(mutationList);
@@ -167,7 +172,7 @@ var callback = (mutationList, observer) => {
 							document.getElementById("img_profile").remove();
 						}
 						resize_observer.disconnect();
-			
+						return true;
 					} else if (v.removedNodes[0].localName == "div" && v.removedNodes[0].id == "bceRichOnlineProfile") {
 						//console.log(v.previousSibling.id);
 						let text_nods = document.getElementById("DescriptionInput");
@@ -197,6 +202,8 @@ var callback = (mutationList, observer) => {
 							}
 							create_img_frame(tmp_profile_pic, text_nods, "textarea");
 						}
+
+						return true;
 					} else if (v.removedNodes[0].localName == "img" && v.removedNodes[0].id == "img_profile") {
 						if (document.getElementById("profile_img")) {
 							document.getElementById("profile_img").remove();
@@ -205,6 +212,8 @@ var callback = (mutationList, observer) => {
 							document.getElementById("img_profile").remove();
 						}
 						resize_observer.disconnect();
+
+						return true;
 					}
 					//nods_observer.disconnect();
 				}
