@@ -67,7 +67,7 @@ function create_img_frame(tmp_profile_pic, text_nods, type) {
 var resize_observer;
 
 var callback = (mutationList, observer) => {
-    console.log(mutationList);
+    //console.log(mutationList);
     let added_chk = mutationList.filter(null_chk => null_chk.addedNodes.length != 0);
 
     if(added_chk.length > 0){
@@ -111,7 +111,7 @@ var callback = (mutationList, observer) => {
     
             if(rich_online_chk.length > 0){
                 if(document.getElementById("DescriptionInput")){
-                    console.log("description detected");
+                    //console.log("description detected");
                     let text_nods = document.getElementById("DescriptionInput");
                     let tmp_profile_pic = document.getElementById("DescriptionInput").value.split("profiles pic:");
                     if(tmp_profile_pic.length > 1){
