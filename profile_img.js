@@ -72,7 +72,7 @@ var callback = (mutationList, observer) => {
         case "childList" :
             if (mutationList[0].addedNodes.length > 0) {
 
-                //console.log(mutationList);
+                console.log(mutationList);
                 //console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName == "textarea");
                 //console.log(mutationList[eval(mutationList.length) - 1].addedNodes[0].id == "DescriptionInput");
                 if(mutationList[eval(mutationList.length) - 1].addedNodes[0].localName){
