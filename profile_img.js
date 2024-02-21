@@ -146,7 +146,11 @@ var callback = (mutationList, observer) => {
                     if (document.getElementById("img_profile")) {
                         document.getElementById("img_profile").remove();
                     }
-                    resize_observer.disconnect();
+                    try{
+                        resize_observer.disconnect();
+                    }catch(e){
+                        console.log(e);
+                    }
                 }
             }
         }
