@@ -108,6 +108,7 @@ var callback = (mutationList, observer) => {
 
         if(removed_chk.length > 0){
             let rich_online_chk = removed_chk.filter(filter_text => filter_text.removedNodes[0].id.includes("bceRichOnlineProfile"));
+            let edit_text_chk = removed_chk.filter(filter_text => filter_text.removedNodes[0].id.includes("DescriptionInput"));
     
             if(rich_online_chk.length > 0){
                 if(document.getElementById("DescriptionInput")){
@@ -152,6 +153,21 @@ var callback = (mutationList, observer) => {
                         console.log(e);
                     }
                 }
+            }
+
+
+            if(edit_text_chk.length > 0 && rich_online_chk.length <= 0){
+                if (document.getElementById("profile_img")) {
+                        document.getElementById("profile_img").remove();
+                    }
+                    if (document.getElementById("img_profile")) {
+                        document.getElementById("img_profile").remove();
+                    }
+                    try{
+                        resize_observer.disconnect();
+                    }catch(e){
+                        console.log(e);
+                    }
             }
         }
     }
