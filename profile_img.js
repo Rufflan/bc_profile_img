@@ -33,7 +33,7 @@ function create_img_frame(tmp_profile_pic, text_nods, type) {
                 let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
                 //let width = text_nods.style.width.replace("px", "");
                 //let height = text_nods.style.height.replace("px", "");
-                let profile_pic = tmp_profile_pic[1].split("\n")[0];
+                let profile_pic = tmp_profile_pic[1].split("\n")[0].trim();
                 let tmp = document.createElement("style");
                 tmp.setAttribute("id", "profile_img");
                 tmp.innerHTML = 'textarea#DescriptionInput{width:' + calc_data.width + ' !important;}';
@@ -50,7 +50,7 @@ function create_img_frame(tmp_profile_pic, text_nods, type) {
             //console.log("create frame div");
             let calc_data = calc_position(100, 160, 1790 * 0.8, 750);
             let img_calc_data = calc_position((1790 * 0.82 + 100), 160, 1790 * 0.2, 1790 * 0.2);
-            let profile_pic = tmp_profile_pic[1].split("\n")[0];
+            let profile_pic = tmp_profile_pic[1].split("\n")[0].trim();
             let tmp = document.createElement("style");
             tmp.setAttribute("id", "profile_img");
             tmp.innerHTML = 'div#bceRichOnlineProfile{width:' + calc_data.width + ' !important;height:' + calc_data.height + ' !important;top:' + calc_data.top + ' !important;left:' + calc_data.left + ' !important}';
